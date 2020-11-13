@@ -29,14 +29,12 @@ const DIFF = 2000;
 
 client.on('ready', () => {
   const activities_list = [
-    "xxhelp", 
-    "discord.me/languages",
     `${client.guilds.cache.size} Servers`
     ];
    setInterval(() => {
 
-        const index = Math.floor(Math.random() * activities_list.length); // generates a random number between 1 and the length of the activities array list (in this case 5).
-        client.user.setActivity(activities_list[index], { type: "LISTENING" }); // sets bot's activities to one of the phrases in the arraylist.
+        const index = Math.floor(Math.random() * activities_list.length);
+        client.user.setActivity(activities_list[index], { type: "LISTENING" }); 
     }, 10000); 
   console.log('Ready!');
 
