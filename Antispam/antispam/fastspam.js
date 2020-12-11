@@ -2,9 +2,9 @@ require('dotenv').config();
 
 
 const usersMap = new Map();
-const LIMIT = 5;
-const TIME = 7000;
-const DIFF = 3000;
+const L = 5;
+const T = 7000;
+const D = 3000;
 
 
 
@@ -15,7 +15,7 @@ module.exports.fastspam_ = async function fastspam_(message) {
     const difference = message.createdTimestamp - lastMessage.createdTimestamp;
     let msgCount = userData.msgCount;
 
-    if(difference > DIFF) {
+    if(difference > D) {
       clearTimeout(timer);
 
       userData.msgCount = 1;
@@ -28,7 +28,7 @@ module.exports.fastspam_ = async function fastspam_(message) {
     }
     else {
       ++msgCount;
-      if(parseInt(msgCount) === LIMIT) {
+      if(parseInt(msgCount) === L) {
         const role = message.guild.roles.cache.find(role => role.name == "muted");
         if(role){
         message.member.roles.add(role);
@@ -55,7 +55,7 @@ module.exports.fastspam_ = async function fastspam_(message) {
           message.member.roles.remove(role);
        
           console.log("muted")
-        }, TIME);
+        }, T);
         const test = async () => {
 
           await new Promise((resolve)=>
@@ -74,7 +74,7 @@ module.exports.fastspam_ = async function fastspam_(message) {
   else {
     let fn = setTimeout(() => {
       usersMap.delete(message.author.id);
-    }, TIME);
+    }, T);
     usersMap.set(message.author.id, {
       msgCount: 1,
       lastMessage: message,
